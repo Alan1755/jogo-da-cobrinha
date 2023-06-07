@@ -1,14 +1,11 @@
 body {
+    background-color: #0d0d3f;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-
-
-
-#gamesnack {
-    width: 512px;
-    height: 512px;
-
+.h1{
+    background-color: #0d0d3f;
 }
+

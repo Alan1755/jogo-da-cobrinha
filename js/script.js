@@ -1,7 +1,7 @@
 //criar elemento que ira rodar o jogo
-let canvas = document.getElementById("snake")
+let canvas = document.getElementById("gamesnake")
 let context = canvas.getContext("2d")
-let box = 32 
+let box = 16
 
 //criar cobrinha como vetor, ja q ela vai ser uma serie de coordenadas, q quando pintadas, criam os quadradinhos.
 let snake = []
@@ -22,16 +22,23 @@ let food ={
 }
 // Função para criar o background
 function criarBG() {
-    context.fillStyle = "lightgreen"
+    context.fillStyle = "darkblue"
     // Desenha o retangulo usando x e y e a largura e alturas setadas
-    context.fillRect(0, 0, 16 * box, 16 * box)
+    context.fillRect(0, 0, 32 * box, 32 * box)
 }
 // Função para criar a cobrinha 
 function criarCobrinha (){
-    for(i = o; i <snake.length; i++){
-        context.fillStyle = "green"
+    for(i = 0; i <snake.length; i++){
+        context.fillStyle = "yellow"
         context.fillRect(snake[i].x, snake[i].y, box, box)
     }
+}
+{
+    // Função para desenhar comida
+ function drawFood (){
+    context.fillStyle = "red"
+    context.fillRect(food.x, food.y, box, box)
+ }
 }
 // Quando um evento acontece, detecta e chama a funçao update
 document.addEventListener('keydown', update)
@@ -44,18 +51,26 @@ function update (event){
 }
 //função principal
 function iniciarJogo(){
-    if(snake[0].x > 15*box && direction == "right"){
+    if(snake[0].x > 30*box && direction == "right"){
         snake[0].x = 0
     }
     if(snake[0].x < 0 && direction == "left"){
         snake[0].x = 16 * box
     }
-    if(snake[0].y > 15*box && direction == "down"){
+    if(snake[0].y > 30*box && direction == "down"){
         snake[0].y = 0
     }
     if(snake[0].y < 0 && direction == "up"){
         snake[0].y = 16 * box
     }
+
+    for(i= 1; i < snake.length; i++){
+        if(snake[0].x == snake[i].x && snake[0].y == snake[i].y){
+            clearInterval(jogo)
+            alert('game over : ( ')
+        }
+    }
+
     criarBG() 
     criarCobrinha()
     drawFood()
@@ -82,5 +97,6 @@ function iniciarJogo(){
     }
     snake.unshift(newHead)
 }
+let jogo = setInterval(iniciarJogo, 100)
     
 
